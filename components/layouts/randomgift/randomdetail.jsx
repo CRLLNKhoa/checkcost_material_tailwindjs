@@ -16,7 +16,7 @@ export default function Randomdetail() {
     <div className="border-l border-dashed p-4 flex flex-col h-full">
       <Tabs value="lich_su">
         <TabsHeader>
-          <Tab value="lich_su">Kênh nhận quà</Tab>
+          <Tab value="lich_su">Kết quả</Tab>
           <Tab value="ti_le">Tỉ lệ</Tab>
           <Tab value="the_le">Hướng dẫn</Tab>
         </TabsHeader>

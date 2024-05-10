@@ -24,59 +24,60 @@ import {
   RectangleGroupIcon,
   SquaresPlusIcon,
   ClockIcon,
-  CalculatorIcon
+  CalculatorIcon,
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
+import Avatarmenu from "./avatarmenu";
 
 const navListMenuItems = [
   {
     title: "Single Rewind",
     description: "Tìm kiếm day thích hợp để nâng skill.",
     icon: RectangleGroupIcon,
-    link: "/single-rewind"
+    link: "/single-rewind",
   },
   {
     title: "Double Rewind",
     description: "Tìm kiếm day thích hợp để tích vé.",
     icon: RectangleGroupIcon,
-    link: "/double-rewind"
+    link: "/double-rewind",
   },
   {
     title: "Thời gian Rewind",
     description: "Mốc thời gian của người chơi khác cung cấp.",
     icon: ClockIcon,
-    link: "/time-rewind"
+    link: "/time-rewind",
   },
   {
     title: "Nhật ký leo day",
     description: "Thông tin kỹ nâng của các người chơi.",
     icon: NewspaperIcon,
-    link: "/push"
+    link: "/push",
   },
   {
     title: "Đội hình phổ biến",
     description: "Đội hình các người chơi khác thường dùng.",
     icon: SquaresPlusIcon,
-    link: "/teams"
+    link: "/teams",
   },
   {
     title: "World Tree (Comming soon)",
     description: "Đề cử nâng cấp WT được nhiều người dùng.",
     icon: SquaresPlusIcon,
-    link: "/world-tree"
+    link: "/world-tree",
   },
   {
     title: "Tính Dame (Comming soon)",
     description: "Find the perfect solution for your needs.",
     icon: CalculatorIcon,
-    link: "/calculator"
+    link: "/calculator",
   },
   {
     title: "Blog (Comming soon)",
     description: "Find the perfect solution for your needs.",
     icon: Bars4Icon,
-    link: "/blogs"
-  }
+    link: "/blogs",
+  },
 ];
 
 function NavListMenu() {
@@ -182,9 +183,6 @@ function NavList() {
           Liên hệ
         </ListItem>
       </Typography>
-      <Button size="sm" color="green">
-        Đăng nhập
-      </Button>
     </List>
   );
 }
@@ -211,8 +209,14 @@ function MegaMenuDefault() {
           >
             _CheckCost
           </Typography>
-          <div className="hidden lg:block">
-            <NavList />
+          <div className="flex items-center gap-4">
+            <div className="hidden lg:block">
+              <NavList />
+            </div>
+            <Avatarmenu />
+            <Button size="sm" color="green">
+              Đăng nhập
+            </Button>
           </div>
           <IconButton
             variant="text"
