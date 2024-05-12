@@ -157,7 +157,7 @@ export function Draweradd({list, setList}) {
           />
           <Input
             value={up}
-            onChange={(e) => setUp(e.target.up)}
+            onChange={(e) => setUp(e.target.value)}
             label="Level UP"
             icon={<img src="/skill/uppng.png" />}
           />
