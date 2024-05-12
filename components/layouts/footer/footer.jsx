@@ -7,7 +7,7 @@ export function SimpleFooter() {
       <Typography color="blue-gray" className="font-normal">
         &copy; 2024 Lương Khoa 🎉
       </Typography>
-      <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <ul className="flex flex-wrap items-center justify-center gap-y-2 gap-x-8">
         <li>
           <Typography
             as="a"

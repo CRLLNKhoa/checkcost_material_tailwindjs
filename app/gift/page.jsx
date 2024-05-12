@@ -1,14 +1,16 @@
 "use client";
+import { addGiftData, getGiftData } from "@/actions/userAction";
 import Historyclamp from "@/components/giftpage/historyclamp";
 import { ProgressLabelOutside } from "@/components/giftpage/progress";
 import Tasks from "@/components/giftpage/tasks";
 import Toast from "@/libs/toast";
 import { useRandomStore } from "@/store/randomstore";
 import { Button, Typography } from "@material-tailwind/react";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Gift() {
   const currentRuby = useRandomStore((state) => state.currentRuby);
+
   const handleGetGift = () => {
     if (currentRuby > 10000) {
       Toast.fire({
@@ -21,6 +23,28 @@ export default function Gift() {
         title: `Còn thiếu ${10000 - currentRuby} ruby !`,
       });
   };
+
+  const setNextTime = useRandomStore((state) => state.setNextTime);
+  const setCurrentRuby = useRandomStore((state) => state.setCurrentRuby);
+
+  useEffect(() => {
+    const get = async () => {
+      const result = await getGiftData();
+      if (result.status === 200) {
+        if (result?.data?.length === 0) {
+          const newUser = await addGiftData();
+          if (newUser.status === 200) {
+            setNextTime(newUser.data[0].next_time);
+            setCurrentRuby(newUser.data[0].current_ruby);
+          }
+        } else {
+          setNextTime(result.data[0].next_time);
+          setCurrentRuby(result.data[0].current_ruby);
+        }
+      }
+    };
+    get();
+  }, []);
   return (
     <div className="py-6 px-4 flex flex-col">
       <Typography as={"string"} variant="h4">

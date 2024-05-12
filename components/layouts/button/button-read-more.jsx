@@ -1,10 +1,12 @@
 "use client"
 import { Button } from '@material-tailwind/react'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
-export default function ButtonReadMore() {
+export default function ButtonReadMore({link}) {
+  const router = useRouter()
   return (
-    <Button variant="text" className="items-center gap-2 hidden lg:flex">
+    <Button onClick={() => router.push(link)} variant="text" className="items-center gap-2 hidden lg:flex">
     Xem thêm{" "}
     <svg
       xmlns="http://www.w3.org/2000/svg"

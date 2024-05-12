@@ -28,31 +28,33 @@ import {
 } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import Avatarmenu from "./avatarmenu";
+import { useUser } from "@clerk/clerk-react";
+import { SignInButton } from "@clerk/nextjs";
 
 const navListMenuItems = [
   {
     title: "Single Rewind",
     description: "Tìm kiếm day thích hợp để nâng skill.",
     icon: RectangleGroupIcon,
-    link: "/single-rewind",
+    link: "/tool/single-rewind",
   },
   {
     title: "Double Rewind",
     description: "Tìm kiếm day thích hợp để tích vé.",
     icon: RectangleGroupIcon,
-    link: "/double-rewind",
+    link: "/tool/double-rewind",
   },
   {
     title: "Thời gian Rewind",
     description: "Mốc thời gian của người chơi khác cung cấp.",
     icon: ClockIcon,
-    link: "/time-rewind",
+    link: "/tool/time-rewind",
   },
   {
     title: "Nhật ký leo day",
     description: "Thông tin kỹ nâng của các người chơi.",
     icon: NewspaperIcon,
-    link: "/push",
+    link: "/logs",
   },
   {
     title: "Đội hình phổ biến",
@@ -64,19 +66,19 @@ const navListMenuItems = [
     title: "World Tree (Comming soon)",
     description: "Đề cử nâng cấp WT được nhiều người dùng.",
     icon: SquaresPlusIcon,
-    link: "/world-tree",
+    link: "/",
   },
   {
     title: "Tính Dame (Comming soon)",
     description: "Find the perfect solution for your needs.",
     icon: CalculatorIcon,
-    link: "/calculator",
+    link: "/",
   },
   {
     title: "Blog (Comming soon)",
     description: "Find the perfect solution for your needs.",
     icon: Bars4Icon,
-    link: "/blogs",
+    link: "/",
   },
 ];
 
@@ -189,6 +191,7 @@ function NavList() {
 
 function MegaMenuDefault() {
   const [openNav, setOpenNav] = React.useState(false);
+  const { isSignedIn, user } = useUser();
 
   React.useEffect(() => {
     window.addEventListener(
@@ -213,10 +216,14 @@ function MegaMenuDefault() {
             <div className="hidden lg:block">
               <NavList />
             </div>
-            <Avatarmenu />
-            <Button size="sm" color="green">
-              Đăng nhập
-            </Button>
+            {isSignedIn && <Avatarmenu user={user} />}
+            {!isSignedIn && (
+              <SignInButton>
+                <Button size="sm" color="green">
+                  Đăng nhập
+                </Button>
+              </SignInButton>
+            )}
           </div>
           <IconButton
             variant="text"

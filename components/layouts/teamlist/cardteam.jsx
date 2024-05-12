@@ -8,11 +8,15 @@ import {
   DialogFooter,
   Chip,
 } from "@material-tailwind/react";
+import Imghero from "../loglist/imghero";
+import { cn } from "@/libs/cn";
+import remarkGfm from "remark-gfm";
+import Markdown from "react-markdown";
 
-export default function Cardteam() {
+export default function Cardteam({ data }) {
+  const { note, rank, name, day, teams } = data;
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(!open);
-
   return (
     <>
       <div
@@ -20,86 +24,51 @@ export default function Cardteam() {
         className="flex flex-col bg-white shadow-md hover:border-blue-500 duration-500 border p-4 rounded-md cursor-pointer"
       >
         <div className="flex items-center">
-          <span className="flex items-center lg:text-lg text-xl mr-4 justify-center rounded-sm size-[32px] lg:size-[25px] bg-[#FF7F7F] text-white">
-            S
+          <span
+            className={cn(
+              "flex items-center uppercase lg:text-lg text-xl mr-4 justify-center rounded-sm size-[32px] bg-red-500 lg:size-[25px] text-white",
+              rank === "s" && "bg-red-500",
+              rank === "s" && "bg-yellow-500",
+              rank === "s" && "bg-blue-500",
+              rank === "s" && "bg-gray-500"
+            )}
+          >
+            {rank || "s"}
           </span>
           <div className="flex items-center justify-between flex-1 gap-y-1 flex-wrap">
             <h1 className="font-semibold text-sm text-primary line-clamp-2">
-              Fated Arcanists Lorem ipsum dolor sit.
+              {name}
             </h1>
             <Chip
               variant="outlined"
               color="light-blue"
               size="sm"
               className="rounded-sm text-xs text-center"
-              value="chip outlined"
+              value={day || "All day"}
             />
           </div>
         </div>
         <div className="flex items-center gap-4 ml-auto flex-wrap mt-4">
-          <div className="border-2 border-red-900">
-            <img
-              className="size-[41px]"
-              src="https://rerollcdn.com/characters/Skin/11/Ahri.png"
-              alt="ảnh tướng"
-            />
-          </div>
-          <div className="border-2 border-red-900">
-            <img
-              className="size-[41px]"
-              src="https://rerollcdn.com/characters/Skin/11/Ahri.png"
-              alt="ảnh tướng"
-            />
-          </div>
-          <div className="border-2 border-red-900">
-            <img
-              className="size-[41px]"
-              src="https://rerollcdn.com/characters/Skin/11/Ahri.png"
-              alt="ảnh tướng"
-            />
-          </div>
-          <div className="border-2 border-red-900">
-            <img
-              className="size-[41px]"
-              src="https://rerollcdn.com/characters/Skin/11/Ahri.png"
-              alt="ảnh tướng"
-            />
-          </div>
-          <div className="border-2 border-red-900">
-            <img
-              className="size-[41px]"
-              src="https://rerollcdn.com/characters/Skin/11/Ahri.png"
-              alt="ảnh tướng"
-            />
-          </div>
-          <div className="border-2 border-red-900">
-            <img
-              className="size-[41px]"
-              src="https://rerollcdn.com/characters/Skin/11/Ahri.png"
-              alt="ảnh tướng"
-            />
-          </div>
+          {teams?.map((item) => (
+            <Imghero key={item} idhero={item} />
+          ))}
         </div>
       </div>
       <Dialog open={open} handler={handleOpen}>
-        <DialogHeader>Its a simple dialog.</DialogHeader>
+        <DialogHeader>{name}</DialogHeader>
         <DialogBody>
-          The key to more success is to have a lot of pillows. Put it this way,
-          it took me twenty five years to get these plants, twenty five years of
-          blood sweat and tears, and I&apos;m never giving up, I&apos;m just
-          getting started. I&apos;m up to something. Fan luv.
+          <div className="flex flex-col">
+            <div className="flex items-center gap-4 flex-wrap mb-4">
+              {teams?.map((item) => (
+                <Imghero key={item} idhero={item} />
+              ))}
+            </div>
+            <Markdown remarkPlugins={[remarkGfm]}>{note}</Markdown>
+          </div>
         </DialogBody>
         <DialogFooter>
-          <Button
-            variant="text"
-            color="red"
-            onClick={handleOpen}
-            className="mr-1"
-          >
-            <span>Cancel</span>
-          </Button>
-          <Button variant="gradient" color="green" onClick={handleOpen}>
-            <span>Confirm</span>
+          <Button variant="gradient" color="red" onClick={handleOpen}>
+            <span>Đóng</span>
           </Button>
         </DialogFooter>
       </Dialog>

@@ -3,8 +3,8 @@ import "./globals.css";
 import MaterialProvider from "@/providers/MaterialProvider";
 import NavListMenu from "@/components/layouts/header/header";
 import { SimpleFooter } from "@/components/layouts/footer/footer";
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+import { ClerkProvider } from "@clerk/nextjs";
+import "sweetalert2/src/sweetalert2.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,11 +17,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="vi">
       <MaterialProvider>
-        <body className={inter.className+ "relative"}>
-          <NavListMenu />
-          <div className="min-h-screen max-w-screen-xl mx-auto">{children}</div>
-          <SimpleFooter />
+        <ClerkProvider>
+          <body className={inter.className + "relative"}>
+            <NavListMenu />
+            <div className="min-h-screen max-w-screen-xl mx-auto">
+              {children}
+            </div>
+            <SimpleFooter />
           </body>
+        </ClerkProvider>
       </MaterialProvider>
     </html>
   );

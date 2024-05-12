@@ -16,7 +16,7 @@ const menuItems = [
     title: "Single Rewind",
     description: "Tìm kiếm day thích hợp để nâng skill.",
     icon: RectangleGroupIcon,
-    link: "/single-rewind",
+    link: "/tool/single-rewind",
     chipcolor: "red",
     chipvalue: "hot",
   },
@@ -24,7 +24,7 @@ const menuItems = [
     title: "Double Rewind",
     description: "Tìm kiếm day thích hợp để tích vé.",
     icon: RectangleGroupIcon,
-    link: "/double-rewind",
+    link: "/tool/double-rewind",
     chipcolor: "red",
     chipvalue: "hot",
   },
@@ -32,7 +32,7 @@ const menuItems = [
     title: "Thời gian Rewind",
     description: "Mốc thời gian của người chơi khác cung cấp.",
     icon: ClockIcon,
-    link: "/time-rewind",
+    link: "/tool/time-rewind",
     chipcolor: "red",
     chipvalue: "hot",
   },
@@ -40,7 +40,7 @@ const menuItems = [
     title: "Nhật ký leo day",
     description: "Thông tin kỹ nâng của các người chơi.",
     icon: NewspaperIcon,
-    link: "/push",
+    link: "/logs",
     chipcolor: "blue",
     chipvalue: "new",
   },
@@ -56,7 +56,7 @@ const menuItems = [
     title: "World Tree",
     description: "Đề cử nâng cấp WT được nhiều người dùng.",
     icon: SquaresPlusIcon,
-    link: "/world-tree",
+    link: "/",
     chipcolor: "gray",
     chipvalue: "close",
   },
@@ -64,7 +64,7 @@ const menuItems = [
     title: "Tính Dame",
     description: "Find the perfect solution for your needs.",
     icon: CalculatorIcon,
-    link: "/calculator",
+    link: "/",
     chipcolor: "gray",
     chipvalue: "close",
   },
@@ -72,7 +72,7 @@ const menuItems = [
     title: "Blog",
     description: "Find the perfect solution for your needs.",
     icon: Bars4Icon,
-    link: "/blogs",
+    link: "/",
     chipcolor: "gray",
     chipvalue: "close",
   },
@@ -96,6 +96,7 @@ export default function Menu() {
             icon={item.icon}
             chipcolor={item.chipcolor}
             chipvalue={item.chipvalue}
+            link={item.link}
           />
         ))}
       </div>
