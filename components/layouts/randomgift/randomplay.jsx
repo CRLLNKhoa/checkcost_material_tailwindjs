@@ -27,28 +27,37 @@ export default function Randomplay() {
   const currentRuby = useRandomStore((state) => state.currentRuby);
   const setNextTime = useRandomStore((state) => state.setNextTime);
   const { isSignedIn, user } = useUser();
-  const [ready,setReady] = useState()
-
+  const [ready, setReady] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRandom = async () => {
-    console.log("test 1")
     const { name, gift } = pickGift(gifts);
-    const result = await addGifted({player: user?.username, user_id: user?.id, gift: name})
-    console.log("test 2", result)
-    if(result?.status === 200){
-      const newNextTime = getTomorrowDateString()
-      const resultUpdate = await updateGiftData({next_time: newNextTime, current_ruby: currentRuby + gift})
-      if(resultUpdate?.status === 200){
-        console.log("test 3")
+    setIsLoading(true);
+    const result = await addGifted({
+      player: user?.username,
+      user_id: user?.id,
+      gift: name,
+    });
+    if (result?.status === 200) {
+      const newNextTime = getTomorrowDateString();
+      const resultUpdate = await updateGiftData({
+        next_time: newNextTime,
+        current_ruby: currentRuby + gift,
+      });
+      if (resultUpdate?.status === 200) {
+        console.log("test 3");
         Toast.fire({
           icon: "success",
           title: name,
         });
         increaseCurrentRuby(gift);
         updateResult(
-          resultList.slice(1).concat({ player: result?.data[0].player, gift: name })
+          resultList
+            .slice(1)
+            .concat({ player: result?.data[0].player, gift: name })
         );
-        setNextTime(newNextTime)
+        setNextTime(newNextTime);
+        setIsLoading(false);
       }
     }
   };
@@ -56,24 +65,23 @@ export default function Randomplay() {
   const router = useRouter();
   const gotopage = () => {
     router.push("/gift");
-  }; 
+  };
 
   useEffect(() => {
     function isPastDate(dateString) {
       // Tạo đối tượng Date từ chuỗi ngày (định dạng dd/mm/yyyy)
-      const parts = dateString.split('/');
+      const parts = dateString.split("/");
       const day = parseInt(parts[0], 10);
       const month = parseInt(parts[1], 10) - 1; // Trừ đi 1 vì tháng bắt đầu từ 0
       const year = parseInt(parts[2], 10);
       const date = new Date(year, month, day);
-    
+
       // So sánh với ngày hiện tại
       const currentDate = new Date();
       return date < currentDate;
     }
-    setReady(isPastDate(nextTime))
-  }, [nextTime])
-  
+    setReady(isPastDate(nextTime));
+  }, [nextTime]);
 
   return (
     <div className="flex items-center justify-center p-4 select-none">
@@ -91,6 +99,7 @@ export default function Randomplay() {
           )}
           {isSignedIn && ready && (
             <Button
+              loading={isLoading}
               onClick={handleRandom}
               className="rounded-md"
               size="sm"
@@ -101,18 +110,18 @@ export default function Randomplay() {
           )}
           {isSignedIn && !ready && (
             <Button
-            onClick={() => {
-              Toast.fire({
-                text: "Hôm nay đã nhận !",
-                icon: "error"
-              })
-            }}
-            className="rounded-md"
-            size="sm"
-            color="red"
-          >
-            Đã nhận
-          </Button>
+              onClick={() => {
+                Toast.fire({
+                  text: "Hôm nay đã nhận !",
+                  icon: "error",
+                });
+              }}
+              className="rounded-md"
+              size="sm"
+              color="red"
+            >
+              Đã nhận
+            </Button>
           )}
           <Button
             onClick={gotopage}
@@ -124,7 +133,6 @@ export default function Randomplay() {
           </Button>
         </div>
       </div>
-      
     </div>
   );
 }
