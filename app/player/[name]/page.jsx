@@ -15,6 +15,7 @@ export default function Player() {
   useEffect(() => {
     setIsLoading(true)
     const get = async () => {
+      console.log(params?.name)
       const result = await getLogs(params?.name)
       console.log(result)
       if(result?.status === 200){
@@ -31,7 +32,7 @@ export default function Player() {
       <div className='grid grid-cols-1 lg:grid-cols-2 mt-6 gap-4'>
         {
           list?.map(item => (
-            <Cardlog data={item} />
+            <Cardlog key={item?.id} data={item} />
           ))
         }
       </div>

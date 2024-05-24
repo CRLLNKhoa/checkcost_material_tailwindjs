@@ -56,7 +56,7 @@ export default function SingleRewind() {
           <Typography className="text-center text-sm">
             Giá trị của time càng nhỏ thời gian rewind càng ngắn
           </Typography>
-          <div className="grid grid-cols-2 py-4 gap-4 max-w-lg mx-auto">
+          <div className="grid lg:grid-cols-2 py-4 gap-4 max-w-lg mx-auto">
             <Input
               color="blue"
               className="w-full"

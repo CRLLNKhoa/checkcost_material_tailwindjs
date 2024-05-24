@@ -15,33 +15,6 @@ import {
 import dataSingleCost from "@/json/singleCost";
 import { cn } from "@/libs/cn";
 
-const TABLE_ROWS = [
-  {
-    name: "John Michael",
-    job: "Manager",
-    date: "23/04/18",
-  },
-  {
-    name: "Alexa Liras",
-    job: "Developer",
-    date: "23/04/18",
-  },
-  {
-    name: "Laurent Perrier",
-    job: "Executive",
-    date: "19/09/17",
-  },
-  {
-    name: "Michael Levi",
-    job: "Developer",
-    date: "24/12/08",
-  },
-  {
-    name: "Richard Gran",
-    job: "Manager",
-    date: "04/10/21",
-  },
-];
 
 export default function SingleRewind() {
   const [currentDay, setCurrentDay] = useState(1000);
@@ -83,7 +56,7 @@ export default function SingleRewind() {
           <Typography className="text-center text-sm">
             Giá trị của cost càng nhỏ thời gian rewind càng ngắn
           </Typography>
-          <div className="grid grid-cols-2 py-4 gap-4 max-w-lg mx-auto">
+          <div className="grid lg:grid-cols-2 py-4 gap-4 max-w-lg mx-auto">
             <Input
               color="blue"
               className="w-full"
@@ -113,7 +86,7 @@ export default function SingleRewind() {
             <p className="text-sm font-semibold">Quick selection</p>
             <div className="flex items-center gap-2 mt-2">
               <Button
-                onClick={() => setPlanDay(currentDay + 100)}
+                onClick={() => setPlanDay(Number(currentDay) + 100)}
                 size="sm"
                 className="rounded-md"
                 variant="outlined"
@@ -121,7 +94,7 @@ export default function SingleRewind() {
                 +100
               </Button>
               <Button
-                onClick={() => setPlanDay(currentDay + 300)}
+                onClick={() => setPlanDay(Number(currentDay) + 300)}
                 size="sm"
                 className="rounded-md"
                 variant="outlined"
@@ -129,7 +102,7 @@ export default function SingleRewind() {
                 +300
               </Button>
               <Button
-                onClick={() => setPlanDay(currentDay + 500)}
+                onClick={() => setPlanDay(Number(currentDay) + 500)}
                 size="sm"
                 className="rounded-md"
                 variant="outlined"
