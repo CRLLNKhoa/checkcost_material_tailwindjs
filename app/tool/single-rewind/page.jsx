@@ -170,11 +170,7 @@ export default function SingleRewind() {
               </thead>
               <tbody>
                 {resultTable.map(({ day, skip, tickets, cost }, index) => {
-                  const isLast = index === TABLE_ROWS.length - 1;
-                  const classes = isLast
-                    ? "p-4"
-                    : "p-4 border-b border-blue-gray-50";
-
+                  const classes = "p-4 border-b border-blue-gray-50";
                   return (
                     <tr
                       className={cn(
