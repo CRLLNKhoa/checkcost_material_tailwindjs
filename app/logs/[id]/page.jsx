@@ -181,7 +181,7 @@ export default function DetailLog() {
         <div className="flex items-center justify-end">
           {log && (
             <Button
-              onClick={() => router.push(`/logs/${log?.player}`)}
+              onClick={() => router.push(`/player/${log?.player}`)}
               variant="text"
               className="flex items-center gap-2"
             >
